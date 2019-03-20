@@ -19,13 +19,9 @@ export default {
 
   authenticate(reason, config) {
     var DEFAULT_CONFIG = {
-      title: 'Authentication Required',
-      imageColor: '#1306ff',
       imageErrorColor: '#ff0000',
-      sensorDescription: 'Touch sensor',
-      sensorErrorDescription: 'Failed',
       cancelText: 'Cancel',
-      unifiedErrors: false
+      unifiedErrors: false,
     };
     var authReason = reason ? reason : ' ';
     var authConfig = Object.assign({}, DEFAULT_CONFIG, config);
@@ -47,7 +43,7 @@ export default {
         }
       );
     });
-  }
+  },
 };
 
 function createError(config, error, code) {
