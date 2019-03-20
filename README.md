@@ -174,8 +174,6 @@ Returns a `Promise` object.
   - `title` - **Android** - title of confirmation dialog
   - `imageColor` - **Android** - color of fingerprint image
   - `imageErrorColor` - **Android** - color of fingerprint image after failed attempt
-  - `sensorDescription` - **Android** - text shown next to the fingerprint image
-  - `sensorErrorDescription` - **Android** - text shown next to the fingerprint image after failed attempt
   - `cancelText` - **Android** - cancel button text
   - `fallbackLabel` - **iOS** - by default specified 'Show Password' label. If set to empty string label is invisible.
   - `unifiedErrors` - return unified error messages (see below) (default = false)
@@ -188,8 +186,6 @@ const optionalConfigObject = {
   title: 'Authentication Required', // Android
   imageColor: '#e00606', // Android
   imageErrorColor: '#ff0000', // Android
-  sensorDescription: 'Touch sensor', // Android
-  sensorErrorDescription: 'Failed', // Android
   cancelText: 'Cancel', // Android
   fallbackLabel: 'Show Passcode', // iOS (if empty, then label is hidden)
   unifiedErrors: false, // use unified error messages (default false)

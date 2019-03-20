@@ -23,16 +23,14 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     private boolean isAuthInProgress;
 
     private ImageView mFingerprintImage;
-    private TextView mFingerprintSensorDescription;
+    private TextView mFingerprintAuthReason;
     private TextView mFingerprintError;
 
-    private String authReason;
     private int imageColor = 0;
     private int imageErrorColor = 0;
     private String dialogTitle = "";
+    private String authReason;
     private String cancelText = "";
-    private String sensorDescription = "";
-    private String sensorErrorDescription = "";
     private String errorText = "";
 
     @Override
@@ -53,16 +51,15 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fingerprint_dialog, container, false);
 
-        final TextView mFingerprintDescription = (TextView) v.findViewById(R.id.fingerprint_description);
-        mFingerprintDescription.setText(this.authReason);
+        final TextView mFingerprintDialogTitle = (TextView) v.findViewById(R.id.fingerprint_dialog_title);
+        mFingerprintDialogTitle.setText(this.dialogTitle);
 
         this.mFingerprintImage = (ImageView) v.findViewById(R.id.fingerprint_icon);
         if (this.imageColor != 0) {
             this.mFingerprintImage.setColorFilter(this.imageColor);
         }
-
-        this.mFingerprintSensorDescription = (TextView) v.findViewById(R.id.fingerprint_sensor_description);
-        this.mFingerprintSensorDescription.setText(this.sensorDescription);
+        this.mFingerprintAuthReason = (TextView) v.findViewById(R.id.fingerprint_auth_reason);
+        this.mFingerprintAuthReason.setText(this.authReason);
 
         this.mFingerprintError = (TextView) v.findViewById(R.id.fingerprint_error);
         this.mFingerprintError.setText(this.errorText);
@@ -76,7 +73,6 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
             }
         });
 
-        getDialog().setTitle(this.dialogTitle);
         getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode != KeyEvent.KEYCODE_BACK || mFingerprintHandler == null) {
@@ -112,7 +108,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         }
     }
 
-
+    
     public void setCryptoObject(FingerprintManager.CryptoObject cryptoObject) {
         this.mCryptoObject = cryptoObject;
     }
@@ -136,14 +132,6 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
 
         if (config.hasKey("cancelText")) {
             this.cancelText = config.getString("cancelText");
-        }
-
-        if (config.hasKey("sensorDescription")) {
-            this.sensorDescription = config.getString("sensorDescription");
-        }
-
-        if (config.hasKey("sensorErrorDescription")) {
-            this.sensorErrorDescription = config.getString("sensorErrorDescription");
         }
 
         if (config.hasKey("imageColor")) {
@@ -174,7 +162,6 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     public void onError(String errorString, int errorCode) {
         this.mFingerprintError.setText(errorString);
         this.mFingerprintImage.setColorFilter(this.imageErrorColor);
-        this.mFingerprintSensorDescription.setText(this.sensorErrorDescription);
     }
 
     @Override
